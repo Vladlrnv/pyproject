@@ -20,7 +20,7 @@ def mask_account_card(user_input: str) -> str:
         return f"{name} {get_mask_card_number(card_number)}"
 
 
-print(mask_account_card("МИР 7365410843013587"))
+print(mask_account_card("Счет 73654108430135871234"))
 
 
 def get_date(date: str) -> str:
