@@ -14,25 +14,24 @@ def mask_account_card(user_input: str) -> str:
         name = " ".join(user_input.split()[0:2])
         card_number = user_input.split()[2]
         return f"{name} {get_mask_card_number(card_number)}"
+    elif user_input.isdigit():
+        return "None"
     else:
         name = user_input.split()[0]
         card_number = user_input.split()[1]
         return f"{name} {get_mask_card_number(card_number)}"
 
 
-print(mask_account_card("Счет 73654108430135871234"))
+print(mask_account_card("73654108430135871234"))
 
 
 def get_date(date: str) -> str:
     """Функция возвращает дату в формате ДД.ММ.ГГГГ"""
-    d = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f")
-    return d.strftime("%d.%m.%Y")
-    # my_date = date.split("T")
-    # new_date = my_date[0]
-    # is_date = new_date.split("-")
-    # is_date.reverse()
-    # correct_date = ".".join(is_date)
-    # return correct_date
+    if date == "":
+        return "None"
+    else:
+        d = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f")
+        return d.strftime("%d.%m.%Y")
 
 
-print(get_date("2023-12-22T02:26:18.671407"))
+print(get_date("2024-03-11T02:26:18.671407"))
