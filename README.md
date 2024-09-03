@@ -26,6 +26,7 @@ IT-отдел крупного банка делает новую фичу дл�
 * tests\test_processing.py                100%
 * tests\test_widget.py                    100%
 * TOTAL                                    96%
+* Более подробно с результатми покрытия можно ознакомиться по ссылке: http://localhost:63342/pythonProject3/htmlcov/function_index.html?_ijt=4b6fdgptb2nulorda6lrfhq7rr&_ij_reload=RELOAD_ON_SAVE
 
 ### Инструкция по установке
 * в терминале необходимо прописать команду pip install -r requirements.txt
