@@ -42,8 +42,8 @@ def test_log_without_txt_error(capsys: Any) -> Any:
     assert (
         captured.out
         == "my_function.\nerror: "
-           "test_log_without_txt_error.<locals>.my_function() missing 1 required positional argument: 'y'.\nInputs: "
-           "(1,).\n"
+           "test_log_without_txt_error.<locals>.my_function() missing 1 required positional argument: 'y'.\nInputs:"
+           " (1,), {}.\n"
     )
 
 
@@ -59,18 +59,18 @@ def test_log_with_txt_error() -> Any:
         content = file.read()
     assert (
         "my_function.\nerror: "
-        "test_log_with_txt_error.<locals>.my_function() missing 1 required positional argument: 'y'.\nInputs: (1,)."
+        "test_log_with_txt_error.<locals>.my_function() missing 1 required positional argument: 'y'.\nInputs: (1,), {}."
         in content
     )
 
 
 def test_log_with_txt_error_str() -> Any:
     @log(filename="log.txt")
-    def my_function(x: int, y: int) -> int:
+    def my_function(x: int, y: str) -> Any:
         return x + y
 
     my_function(1, "2")
     with open("log.txt", "r") as file:
         content = file.read()
-    assert "my_function.\nerror: unsupported operand type(s) for +: 'int' and 'str'.\nInputs: (1, '2')." in content
+    assert "my_function.\nerror: unsupported operand type(s) for +: 'int' and 'str'.\nInputs: (1, '2'), {}." in content
     assert my_function(1, "2") is None

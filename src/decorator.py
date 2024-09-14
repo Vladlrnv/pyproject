@@ -1,9 +1,7 @@
 from typing import Any, Union
 
-filename = None
 
-
-def log(filename: Any) -> Any:
+def log(filename: Any = None) -> Any:
     """Декоратор логирует начало и конец выполнения декорируемой функции, а также ее результаты или возникшие ошибки"""
 
     def decor(func: Any) -> Any:
@@ -19,17 +17,15 @@ def log(filename: Any) -> Any:
             except Exception as ex:
                 if filename:
                     with open(filename, "w") as file:
-                        file.write(f"{func.__name__}.\nerror: {ex}.\nInputs: {args}.")
+                        file.write(f"{func.__name__}.\nerror: {ex}.\nInputs: {args}, {kwargs}.")
                 else:
-                    print(f"{func.__name__}.\nerror: {ex}.\nInputs: {args}.")
-
+                    print(f"{func.__name__}.\nerror: {ex}.\nInputs: {args}, {kwargs}.")
         return wrapper
-
     return decor
 
 
-@log(filename="log.txt")
-def my_function(x: Union[int, float], y: Union[int, float]) -> Union[int, float]:
+@log()
+def my_function(x: Union[int, float, str], y: Union[int, float, str]) -> Union[int, float]:
     """Функция возвращает результат сложения чисел"""
     return x + y
 
