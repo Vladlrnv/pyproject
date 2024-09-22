@@ -40,10 +40,9 @@ def test_log_without_txt_error(capsys: Any) -> Any:
     my_function(1)
     captured = capsys.readouterr()
     assert (
-        captured.out
-        == "my_function.\nerror: "
-           "test_log_without_txt_error.<locals>.my_function() missing 1 required positional argument: 'y'.\nInputs:"
-           " (1,), {}.\n"
+        captured.out == "my_function.\nerror: "
+        "test_log_without_txt_error.<locals>.my_function() missing 1 required positional argument: 'y'.\nInputs:"
+        " (1,), {}.\n"
     )
 
 
