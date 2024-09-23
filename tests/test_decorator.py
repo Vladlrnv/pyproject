@@ -65,7 +65,7 @@ def test_log_with_txt_error() -> Any:
 
 def test_log_with_txt_error_str() -> Any:
     @log(filename="log.txt")
-    def my_function(x: int, y: str) -> Any:
+    def my_function(x: Any, y: Any) -> Any:
         return x + y
 
     my_function(1, "2")
