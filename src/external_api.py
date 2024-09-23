@@ -9,6 +9,7 @@ API_KEY = os.getenv("API_KEY")
 
 
 def converter(transaction: dict) -> Any:
+    """ Функция принимает на вход транзакцию и возвращает сумму транзакции в рублях """
     amount = transaction["operationAmount"]["amount"]
     currency = transaction["operationAmount"]["currency"]["code"]
     if transaction["operationAmount"]["currency"]["code"] == "RUB":
