@@ -13,7 +13,7 @@ def converter(transaction: dict) -> Any:
     amount = transaction["operationAmount"]["amount"]
     currency = transaction["operationAmount"]["currency"]["code"]
     if transaction["operationAmount"]["currency"]["code"] == "RUB":
-        return amount
+        return float(amount)
     else:
         payload = {"amount": amount, "from": currency, "to": "RUB", "apikey": API_KEY}
         # headers = {"api_key": API_KEY}
@@ -26,22 +26,22 @@ def converter(transaction: dict) -> Any:
         else:
             result = response.json()
             data = result.get("result")
-            return round(data, 2)
+            return float(round(data, 2))
 
 
-# transaction = {
-#     "id": 41428829,
-#     "state": "EXECUTED",
-#     "date": "2019-07-03T18:35:29.512364",
-#     "operationAmount": {
-#       "amount": "8221.37",
-#       "currency": {
-#         "name": "USD",
-#         "code": "USD"
-#       }
-#     },
-#     "description": "Перевод организации",
-#     "from": "MasterCard 7158300734726758",
-#     "to": "Счет 35383033474447895560"
-#   }
-# converter(transaction)
+transaction = {
+    "id": 441945886,
+    "state": "EXECUTED",
+    "date": "2019-08-26T10:50:58.294041",
+    "operationAmount": {
+      "amount": "31957.58",
+      "currency": {
+        "name": "USD",
+        "code": "USD"
+      }
+    },
+    "description": "Перевод организации",
+    "from": "Maestro 1596837868705199",
+    "to": "Счет 64686473678894779589"
+  }
+print(type(converter(transaction)))
