@@ -14,4 +14,4 @@ def test_converter(mock_get: Any, trans: Any) -> Any:
 
 
 def test_converter_rub(trans_2: Any) -> Any:
-    assert converter(trans_2) == "8221.37"
+    assert converter(trans_2) == float(8221.37)
