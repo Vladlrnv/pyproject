@@ -1,4 +1,5 @@
 import json
+import os.path
 from typing import Any
 import logging
 
@@ -14,7 +15,7 @@ def get_transactions(file_path: Any) -> Any:
     """Функция возвращает список словарей с данными о финансовых транзакциях"""
     transactions_logger.info(f"Начало работы программы")
     try:
-        with open(file_path, encoding="utf-8") as file:
+        with open(file_path, "r", encoding="utf-8") as file:
             data = json.load(file)
             transactions_logger.info(f"Путь указан корректно. Список транзакций получен")
     except FileNotFoundError as e:
@@ -26,5 +27,6 @@ def get_transactions(file_path: Any) -> Any:
     return data
 
 
-path = r"C:\Users\ADMIN\PycharmProjects\pythonProject3\data\operations.json"
+path = os.path.join(os.path.dirname(__file__), "..", "data", "operations.json")
+# path = r"C:\Users\ADMIN\PycharmProjects\pythonProject3\data\operations.json"
 print(get_transactions(path))
