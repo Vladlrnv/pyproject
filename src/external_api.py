@@ -9,7 +9,7 @@ API_KEY = os.getenv("API_KEY")
 
 
 def converter(transaction: dict) -> Any:
-    """ Функция принимает на вход транзакцию и возвращает сумму транзакции в рублях """
+    """Функция принимает на вход транзакцию и возвращает сумму транзакции в рублях"""
     amount = transaction["operationAmount"]["amount"]
     currency = transaction["operationAmount"]["currency"]["code"]
     if transaction["operationAmount"]["currency"]["code"] == "RUB":
@@ -33,15 +33,9 @@ transaction = {
     "id": 441945886,
     "state": "EXECUTED",
     "date": "2019-08-26T10:50:58.294041",
-    "operationAmount": {
-      "amount": "31957.58",
-      "currency": {
-        "name": "USD",
-        "code": "USD"
-      }
-    },
+    "operationAmount": {"amount": "31957.58", "currency": {"name": "USD", "code": "USD"}},
     "description": "Перевод организации",
     "from": "Maestro 1596837868705199",
-    "to": "Счет 64686473678894779589"
-  }
+    "to": "Счет 64686473678894779589",
+}
 print(type(converter(transaction)))

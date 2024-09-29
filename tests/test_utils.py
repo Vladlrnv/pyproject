@@ -1,12 +1,12 @@
 from typing import Any
-from unittest.mock import patch, mock_open
+from unittest.mock import mock_open, patch
 
 from src.utils import get_transactions
 
 
 @patch("os.path.exists")
 @patch("json.load")
-def test_get_transactions_valid_json(mocked_load, mock_os_path_exists):
+def test_get_transactions_valid_json(mocked_load: Any, mock_os_path_exists: Any) -> Any:
     mock_os_path_exists.return_value = True
     m = mock_open()
     with patch("builtins.open", m) as mocked_open:
@@ -18,8 +18,7 @@ def test_get_transactions_valid_json(mocked_load, mock_os_path_exists):
             {"amount": "100", "currency": "RUB"},
             {"amount": "200", "currency": "USD"},
         ]
-        mocked_open.assert_called_with("operations.json", "r",
-                                       encoding="utf-8")
+        mocked_open.assert_called_with("operations.json", "r", encoding="utf-8")
 
 
 def test_get_transactions_empty() -> Any:
