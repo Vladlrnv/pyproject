@@ -20,12 +20,14 @@ def log(filename: Any = None) -> Any:
                         file.write(f"{func.__name__}.\nerror: {ex}.\nInputs: {args}, {kwargs}.")
                 else:
                     print(f"{func.__name__}.\nerror: {ex}.\nInputs: {args}, {kwargs}.")
+
         return wrapper
+
     return decor
 
 
 @log()
-def my_function(x: Union[int, float, str], y: Union[int, float, str]) -> Union[int, float]:
+def my_function(x: Any, y: Any) -> Any:
     """Функция возвращает результат сложения чисел"""
     return x + y
 

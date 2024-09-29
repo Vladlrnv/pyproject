@@ -60,3 +60,34 @@ def gen() -> tuple[dict[str, object]]:
         "from": "Visa Platinum 1246377376343588",
         "to": "Счет 14211924144426031657",
     }
+
+
+@pytest.fixture
+def utils() -> str:
+    return r"C:\Users\ADMIN\PycharmProjects\pythonProject3\data\operations.json"
+
+
+@pytest.fixture
+def trans() -> dict:
+    return {
+        "id": 41428829,
+        "state": "EXECUTED",
+        "date": "2019-07-03T18:35:29.512364",
+        "operationAmount": {"amount": "8221.37", "currency": {"name": "USD", "code": "USD"}},
+        "description": "Перевод организации",
+        "from": "MasterCard 7158300734726758",
+        "to": "Счет 35383033474447895560",
+    }
+
+
+@pytest.fixture
+def trans_2() -> dict:
+    return {
+        "id": 41428830,
+        "state": "EXECUTED",
+        "date": "2019-07-03T18:35:29.512364",
+        "operationAmount": {"amount": "8221.37", "currency": {"name": "руб.", "code": "RUB"}},
+        "description": "Перевод организации",
+        "from": "MasterCard 7158300734726758",
+        "to": "Счет 35383033474447895560",
+    }
