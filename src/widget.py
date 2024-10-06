@@ -1,37 +1,26 @@
-from datetime import datetime
-
 from src.masks import get_mask_account, get_mask_card_number
 
 
-def mask_account_card(user_input: str) -> str:
-    """Функция возвращает строку с замаскированным номером"""
-    if "Счет" in user_input:
-        name = user_input.split()[0]
-        card_number = user_input.split()[1]
-        return f"{name} {get_mask_account(card_number)}"
-
-    elif "Visa" in user_input:
-        name = " ".join(user_input.split()[0:2])
-        card_number = user_input.split()[2]
-        return f"{name} {get_mask_card_number(card_number)}"
-    elif user_input.isdigit():
-        return "None"
-    else:
-        name = user_input.split()[0]
-        card_number = user_input.split()[1]
-        return f"{name} {get_mask_card_number(card_number)}"
+def mask_account_card(requisites: str) -> str:
+    """функция общей маскировки карты и счета."""
+    parts = requisites.split()  # делим на части по пробелу
+    number = parts[-1]  # забираем последний элемент (там всегда номер карты или счёта)
+    if requisites.lower().startswith("счет"):  # если пришёл счёт - отдаём номер в ф-цию маскировки номера счёта
+        hidden_number = get_mask_account(number)
+    else:  # иначе отдаём номер в функцию маскироки карты и получаем скрытый вариант номера
+        hidden_number = get_mask_card_number(number)
+    parts[-1] = hidden_number  # подставляем скрытый номер обратно
+    return " ".join(parts)  # соединяем список в строку
 
 
-print(mask_account_card("73654108430135871234"))
+# print(mask_account_card('American Express 1963030970727681'))
 
 
-def get_date(date: str) -> str:
-    """Функция возвращает дату в формате ДД.ММ.ГГГГ"""
-    if date == "":
-        return "None"
-    else:
-        d = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f")
-        return d.strftime("%d.%m.%Y")
+def get_date(input_string: str) -> str:
+    """Фнкция преобразования даты"""
+    data = input_string.split("Т")[0]
+    formatted_date = f"{data[8:10]}.{data[5:7]}.{data[:4]}"
+    return formatted_date
 
 
-print(get_date("2024-03-11T02:26:18.671407"))
+# print(get_date("2022-06-20T18:08:20Z"))
