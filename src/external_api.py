@@ -8,11 +8,11 @@ load_dotenv()
 API_KEY = os.getenv("API_KEY")
 
 
-def converter(transaction: dict) -> Any:
+def converter(transaction: Any) -> Any:
     """Функция принимает на вход транзакцию и возвращает сумму транзакции в рублях"""
-    amount = transaction["operationAmount"]["amount"]
-    currency = transaction["operationAmount"]["currency"]["code"]
-    if transaction["operationAmount"]["currency"]["code"] == "RUB":
+    amount = transaction[0]["operationAmount"]["amount"]
+    currency = transaction[0]["operationAmount"]["currency"]["code"]
+    if currency == "RUB":
         return float(amount)
     else:
         payload = {"amount": amount, "from": currency, "to": "RUB", "apikey": API_KEY}
@@ -29,13 +29,20 @@ def converter(transaction: dict) -> Any:
             return float(round(data, 2))
 
 
-transaction = {
-    "id": 441945886,
-    "state": "EXECUTED",
-    "date": "2019-08-26T10:50:58.294041",
-    "operationAmount": {"amount": "31957.58", "currency": {"name": "USD", "code": "USD"}},
-    "description": "Перевод организации",
-    "from": "Maestro 1596837868705199",
-    "to": "Счет 64686473678894779589",
-}
-print(type(converter(transaction)))
+# transaction = {
+#     "id": 895315941,
+#     "state": "EXECUTED",
+#     "date": "2018-08-19T04:27:37.904916",
+#     "operationAmount": {
+#       "amount": "56883.54",
+#       "currency": {
+#         "name": "USD",
+#         "code": "USD"
+#       }
+#     },
+#     "description": "Перевод с карты на карту",
+#     "from": "Visa Classic 6831982476737658",
+#     "to": "Visa Platinum 8990922113665229"
+#   }
+
+# print(converter(transaction))

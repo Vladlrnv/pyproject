@@ -69,42 +69,102 @@ def utils() -> str:
 
 
 @pytest.fixture
-def trans() -> dict:
-    return {
-        "id": 41428829,
-        "state": "EXECUTED",
-        "date": "2019-07-03T18:35:29.512364",
-        "operationAmount": {"amount": "8221.37", "currency": {"name": "USD", "code": "USD"}},
-        "description": "Перевод организации",
-        "from": "MasterCard 7158300734726758",
-        "to": "Счет 35383033474447895560",
-    }
+def trans() -> list[dict]:
+    return [
+        {
+            "id": 41428829,
+            "state": "EXECUTED",
+            "date": "2019-07-03T18:35:29.512364",
+            "operationAmount": {"amount": "8221.37", "currency": {"name": "USD", "code": "USD"}},
+            "description": "Перевод организации",
+            "from": "MasterCard 7158300734726758",
+            "to": "Счет 35383033474447895560",
+        }
+    ]
 
 
 @pytest.fixture
-def trans_2() -> dict:
-    return {
-        "id": 41428830,
-        "state": "EXECUTED",
-        "date": "2019-07-03T18:35:29.512364",
-        "operationAmount": {"amount": "8221.37", "currency": {"name": "руб.", "code": "RUB"}},
-        "description": "Перевод организации",
-        "from": "MasterCard 7158300734726758",
-        "to": "Счет 35383033474447895560",
-    }
+def trans_2() -> list[dict]:
+    return [
+        {
+            "id": 41428830,
+            "state": "EXECUTED",
+            "date": "2019-07-03T18:35:29.512364",
+            "operationAmount": {"amount": "8221.37", "currency": {"name": "руб.", "code": "RUB"}},
+            "description": "Перевод организации",
+            "from": "MasterCard 7158300734726758",
+            "to": "Счет 35383033474447895560",
+        }
+    ]
 
 
 @pytest.fixture
 def df_csv_transaction() -> pd.DataFrame:
-    csv_test_dict = {
-        "id": [650703.0, 3598919.0],
-        "state": ["EXECUTED", "EXECUTED"],
-        "date": ["2023-09-05T11:30:32Z", "2020-12-06T23:00:58Z"],
-        "amount": [16210.0, 29740.0],
-        "currency_name": ["Sol", "Peso"],
-        "currency_code": ["PEN", "COP"],
-        "from": ["Счет 58803664561298323391", "Discover 3172601889670065"],
-        "to": ["Счет 39745660563456619397", "Discover 0720428384694643"],
-        "description": ["Перевод организации", "Перевод с карты на карту"],
-    }
-    return pd.DataFrame(csv_test_dict)
+    csv_trans = [
+        {
+            "id": "650703.0",
+            "state": "EXECUTED",
+            "date": "2023-09-05T11:30:32Z",
+            "operationAmount": {"amount": "16210.0", "currency": {"name": "Sol", "code": "PEN"}},
+            "description": "Перевод организации",
+            "from": "Счет 58803664561298323391",
+            "to": "Счет 39745660563456619397",
+        }
+    ]
+    return pd.DataFrame(csv_trans)
+
+
+@pytest.fixture
+def searching() -> list[dict]:
+    return [
+        {
+            "id": 587085106,
+            "state": "EXECUTED",
+            "date": "2018-03-23T10:45:06.972075",
+            "operationAmount": {"amount": "48223.05", "currency": {"name": "руб.", "code": "RUB"}},
+            "description": "Открытие вклада",
+            "to": "Счет 41421565395219882431",
+        },
+        {
+            "id": 142264268,
+            "state": "EXECUTED",
+            "date": "2019-04-04T23:20:05.206878",
+            "operationAmount": {"amount": "79114.93", "currency": {"name": "USD", "code": "USD"}},
+            "description": "Перевод со счета на счет",
+            "from": "Счет 19708645243227258542",
+            "to": "Счет 75651667383060284188",
+        },
+        {
+            "id": 873106923,
+            "state": "EXECUTED",
+            "date": "2019-03-23T01:09:46.296404",
+            "operationAmount": {"amount": "43318.34", "currency": {"name": "руб.", "code": "RUB"}},
+            "description": "Перевод со счета на счет",
+            "from": "Счет 44812258784861134719",
+            "to": "Счет 74489636417521191160",
+        },
+    ]
+
+
+@pytest.fixture
+def categories() -> list:
+    return [
+        "Перевод организации",
+        "Открытие вклада",
+        "Перевод со счета на счет",
+        "Перевод с карты на карту",
+        "Перевод с карты на счет",
+    ]
+
+
+@pytest.fixture
+def test_input() -> str:
+    input_ = input(
+        """Привет! Добро пожаловать в программу работы с банковскими транзакциями.
+Выберите необходимый пункт меню:
+1. Получить информацию о транзакциях из JSON-файла
+2. Получить информацию о транзакциях из CSV-файла
+3. Получить информацию о транзакциях из XLSX-файла
+"""
+    )
+    return input_

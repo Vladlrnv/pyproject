@@ -29,4 +29,4 @@ def get_transactions(file_path: Any) -> Any:
 
 path = os.path.join(os.path.dirname(__file__), "..", "data", "operations.json")
 # path = r"C:\Users\ADMIN\PycharmProjects\pythonProject3\data\operations.json"
-print(get_transactions(path))
+# print(get_transactions(path))

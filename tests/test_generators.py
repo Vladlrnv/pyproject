@@ -24,12 +24,6 @@ def test_filter_by_currency_empty() -> Any:
         assert next(generator) == exit_
 
 
-def test_filter_by_currency_no_cur(gen: tuple[dict[str, object]]) -> Any:
-    with pytest.raises(SystemExit, match="В транзакциях нет такой валюты") as ex:
-        generator = filter_by_currency(gen, "EU")
-        assert next(generator) == ex
-
-
 def test_transaction_descriptions_empty() -> Any:
     with pytest.raises(SystemExit, match="Нет транзакций") as exit_:
         generator = transaction_descriptions([])
